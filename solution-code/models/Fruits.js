@@ -22,5 +22,6 @@ fruits = [
 ];
 
 module.exports = {
+	// object shorthand
 	fruits,
 };
