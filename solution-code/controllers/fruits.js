@@ -36,4 +36,25 @@ router.post('/', (req, res) => {
 	res.redirect('/fruits');
 });
 
+// DELETE
+router.delete('/:indexOfFruitsArray', (req, res) => {
+	fruits.splice(req.params.indexOfFruitsArray, 1);
+	res.redirect('/fruits')
+});
+
+// EDIT PAGE
+router.get('/:indexOfFruitsArray/edit', (req, res) => {
+	res.render('edit.ejs', {fruit: fruits[req.params.indexOfFruitsArray], index: req.params.indexOfFruitsArray})
+});
+
+router.put('/:indexOfFruitsArray', (req, res) => {
+	if(req.body.readyToEat === 'on') { 
+		req.body.readyToEat = true;
+	} else {
+		req.body.readyToEat = false;
+	}
+	fruits[req.params.indexOfFruitsArray] = req.body;
+	res.redirect('/fruits')
+})
+
 module.exports = router;
