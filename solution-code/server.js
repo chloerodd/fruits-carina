@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 4000
+const methodOverride = require('method-override')
 // Controller
 const fruitsController = require('./controllers/fruits');
 
@@ -15,6 +16,8 @@ const fruits = models.fruits
 // Middleware req -> middleware -> res
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended:false }));
+app.use(express.json()); //parse JSON data in the request body
+app.use(methodOverride('_method'))
 // without urlencoded we get req.body undefined
 
 app.use((req,res,next) => {
